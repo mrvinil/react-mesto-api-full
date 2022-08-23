@@ -13,6 +13,7 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      credentials: 'include',
       method: 'GET',
       headers: this._headers
     })
@@ -21,6 +22,7 @@ class Api {
 
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
+      credentials: 'include',
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -33,6 +35,7 @@ class Api {
 
   deleteCard(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}`, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers
     })
@@ -41,6 +44,7 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       method: 'GET',
       headers: this._headers
     })
@@ -49,6 +53,7 @@ class Api {
 
   editUserInfo(userData) {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -61,6 +66,7 @@ class Api {
 
   editUserAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
+      credentials: 'include',
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -72,6 +78,7 @@ class Api {
 
   putLike(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
+      credentials: 'include',
       method: 'PUT',
       headers: this._headers
     })
@@ -80,6 +87,7 @@ class Api {
 
   deleteLike(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
+      credentials: 'include',
       method: 'DELETE',
       headers: this._headers
     })
@@ -88,6 +96,7 @@ class Api {
 
   changeLikeCardStatus(cardID, isLiked) {
     return fetch(this._baseUrl + `/cards/${cardID}/likes`, {
+      credentials: 'include',
       method: `${isLiked ? 'PUT' : 'DELETE'}`,
       headers: this._headers
     })
@@ -101,8 +110,8 @@ class Api {
 
 export const api = new Api ({
   baseUrl: 'https://api.mrvinil.project.nomoredomains.sbs',
+  credentials: 'include',
   headers: {
-    authorization: '94f82fe8-d5f1-4c97-b104-8e3f90c97123',
     'Content-Type': 'application/json',
   }
 });
