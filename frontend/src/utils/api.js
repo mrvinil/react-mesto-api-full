@@ -100,7 +100,7 @@ class Api {
 }
 
 export const api = new Api ({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+  baseUrl: 'https://api.mrvinil.project.nomoredomains.sbs',
   headers: {
     authorization: '94f82fe8-d5f1-4c97-b104-8e3f90c97123',
     'Content-Type': 'application/json',
