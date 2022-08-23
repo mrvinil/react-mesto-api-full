@@ -1,0 +1,20 @@
+.profile__edit {
+  background: url(../../../images/icon__edit.svg) no-repeat;
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.profile__edit:hover {
+  opacity: .6;
+}
+
+@media (max-width: 550px) {
+  .profile__edit {
+    width: 18px;
+    height: 18px;
+  }
+}

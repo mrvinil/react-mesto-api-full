@@ -1,0 +1,13 @@
+.auth__link {
+  display: flex;
+  justify-self: center;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  color: var(--color__white);
+  transition: .2s ease;
+}
+
+.auth__link:hover {
+  opacity: 0.8;
+}

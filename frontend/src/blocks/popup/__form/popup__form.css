@@ -1,0 +1,13 @@
+.popup__form {
+  background: var(--color__white);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 34px 36px 37px;
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .popup__form {
+    padding: 25px 22px;
+  }
+}

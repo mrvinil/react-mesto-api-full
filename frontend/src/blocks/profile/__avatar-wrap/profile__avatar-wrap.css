@@ -1,0 +1,32 @@
+.profile__avatar-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .2s ease;
+  cursor: pointer;
+  z-index: 1;
+}
+.profile__avatar-wrap::before {
+  content: '';
+  background: url(../../../images/icon__edit_noborder.svg) no-repeat;
+  background-size: cover;
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  visibility: hidden;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+  transition: .2s ease;
+}
+
+.profile__avatar-wrap:hover .profile__avatar {
+  opacity: .6;
+  transition: .2s ease;
+}
+.profile__avatar-wrap:hover.profile__avatar-wrap::before {
+  visibility: visible;
+  opacity: 1;
+  transition: .2s ease;
+}

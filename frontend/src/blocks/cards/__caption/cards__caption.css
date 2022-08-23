@@ -1,0 +1,13 @@
+.cards__caption {
+  display: flex;
+  padding: 25px 20px 26px 21px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .cards__caption {
+    padding: 25px 20px 25px 21px;
+  }
+}

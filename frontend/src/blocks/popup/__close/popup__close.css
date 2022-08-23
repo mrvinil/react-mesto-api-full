@@ -1,0 +1,25 @@
+.popup__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  width: 32px;
+  height: 32px;
+  background: url(../../../images/icon__close.svg) no-repeat;
+  background-size: 32px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.popup__close:hover {
+  opacity: 0.6;
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .popup__close {
+    width: 20px;
+    height: 20px;
+    background-size: 20px;
+  }
+}

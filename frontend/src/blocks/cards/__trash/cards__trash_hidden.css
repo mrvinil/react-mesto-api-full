@@ -1,0 +1,5 @@
+.cards__trash_hidden {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}

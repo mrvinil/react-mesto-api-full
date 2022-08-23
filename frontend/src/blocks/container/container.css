@@ -1,0 +1,11 @@
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .container {
+    max-width: 282px;
+  }
+}

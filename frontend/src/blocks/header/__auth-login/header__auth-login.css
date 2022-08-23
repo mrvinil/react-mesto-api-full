@@ -1,0 +1,11 @@
+.header__auth-login {
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: none;
+  color: var(--color__white);
+  transition: .2s ease;
+}
+
+.header__auth-login:hover {
+  opacity: 0.8;
+}

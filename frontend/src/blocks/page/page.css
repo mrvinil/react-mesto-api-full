@@ -1,0 +1,26 @@
+:root {
+  --color__black: #000;
+  --color__white: #fff;
+  --color__gray: #545454;
+  --color__red: #FF0000;
+}
+
+.page {
+  min-width: 320px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 45px 0 60px;
+}
+
+@media (min-width: 425px) and (max-width: 992px) {
+  .page {
+    padding: 45px 20px 60px;
+  }
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .page {
+    padding: 28px 0 36px;
+  }
+}

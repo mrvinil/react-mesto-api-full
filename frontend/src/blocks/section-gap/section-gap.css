@@ -1,0 +1,17 @@
+.section-gap {
+  padding-top: 50px;
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section-gap {
+    /*padding-top: 88px;*/
+  }
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .section-gap {
+    padding-top: 37px;
+  }
+}
