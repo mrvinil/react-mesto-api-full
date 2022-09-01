@@ -1,28 +1,9 @@
 const { celebrate, Joi } = require('celebrate');
 
 // eslint-disable-next-line no-useless-escape
-const linkRegExp = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/;
+const linkRegExp = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})(\/[\w.-]*)*\/?$/;
 
-const userValidationId = celebrate({
-  params: Joi.object().keys({
-    userId: Joi.string().length(24).hex(),
-  }),
-});
-
-const cardValidationId = celebrate({
-  params: Joi.object().keys({
-    cardId: Joi.string().length(24).hex(),
-  }),
-});
-
-const loginValidation = celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-});
-
-const userValidation = celebrate({
+const createUserValidator = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
@@ -32,33 +13,45 @@ const userValidation = celebrate({
   }),
 });
 
-const cardValidation = celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required().pattern(linkRegExp),
-  }),
-});
-
-const userAboutValidation = celebrate({
+const updateUserProfileValidator = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     about: Joi.string().required().min(2).max(30),
   }),
 });
 
-const avatarValidation = celebrate({
+const updateUserAvatarValidator = celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().pattern(linkRegExp),
+    avatar: Joi.string().pattern(linkRegExp).required(),
+  }),
+});
+
+const loginValidator = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+  }),
+});
+
+const createCardValidator = celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().required().min(2).max(30),
+    link: Joi.string().pattern(linkRegExp).required(),
+  }),
+});
+
+const idValidator = celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().length(24).hex().required(),
   }),
 });
 
 module.exports = {
-  userValidation,
-  cardValidation,
-  userAboutValidation,
-  avatarValidation,
-  loginValidation,
-  userValidationId,
-  cardValidationId,
   linkRegExp,
+  createUserValidator,
+  updateUserProfileValidator,
+  updateUserAvatarValidator,
+  loginValidator,
+  createCardValidator,
+  idValidator,
 };

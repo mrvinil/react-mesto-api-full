@@ -1,27 +1,53 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 
-function AuthPageWithForm(props) {
-  const authUrl = '/sign-in';
+function AuthPageWithForm(
+  {
+    name,
+    title,
+    email,
+    password,
+    buttonText,
+    onChange,
+    onSubmit,
+    children
+  }) {
 
   return (
     <div className="auth">
-      <form
-        name={props.name}
-        className="auth__form"
-        id={props.formID}
-        onSubmit={props.onSubmit}
-      >
-        <fieldset className="auth__field-wrap">
-          <h2 className="auth__title">{props.title}</h2>
-          {props.children}
-        </fieldset>
-        <fieldset className="auth__field-wrap auth__field-wrap_type_buttons">
-          <button className="auth__button" type="submit" name="authSubmit">{props.buttonValue}</button>
-          {
-            props.name === 'registerForm' && (<Link to={authUrl} className="auth__link">Уже зарегистрированы? Войти</Link>)
-          }
-        </fieldset>
+      <form name={name} className={`auth__form form-${name}`} onSubmit={onSubmit} noValidate>
+        <h2 className="auth__title">{title}</h2>
+        <div className="auth__inputs">
+          <label className="auth__label">
+            <input
+              id="email"
+              className="auth__input auth__input_email"
+              type="email"
+              name="email"
+              value={email}
+              onChange={onChange}
+              placeholder="Email"
+              minLength="2"
+              maxLength="40"
+              required/>
+            <span className="auth__input-error email-input-error"></span>
+          </label>
+          <label className="auth__label">
+            <input
+              id="password"
+              className="auth__input auth__input_password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={onChange}
+              placeholder="Пароль"
+              minLength="2"
+              maxLength="200"
+              required/>
+            <span className="auth__input-error password-input-error"></span>
+          </label>
+        </div>
+        <button type="submit" className="auth__button">{buttonText}</button>
+        {children}
       </form>
     </div>
   );

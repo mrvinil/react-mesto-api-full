@@ -25,6 +25,7 @@
 node_modules
 dist
 
+.env
 .idea
 .vscode
 .DS_Store
@@ -33,7 +34,6 @@ dist
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
 /.pnp
 .pnp.js
 
@@ -44,7 +44,7 @@ dist
 /coverage
 
 # production
-/build
+build
 
 # misc
 .env.local

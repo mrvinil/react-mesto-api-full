@@ -8,110 +8,86 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject('Ошибка')
+    return Promise.reject('Ошибка');
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      credentials: 'include',
+    return fetch(`${this._baseUrl}cards`, {
       method: 'GET',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse);
   }
 
-  addCard(data) {
-    return fetch(`${this._baseUrl}/cards`, {
+  getProfileInfo() {
+    return fetch(`${this._baseUrl}users/me`, {
+      headers: this._headers,
       credentials: 'include',
+    })
+      .then(this._checkResponse);
+  }
+
+  changeUserInfo(data) {
+    return fetch(`${this._baseUrl}users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      credentials: 'include',
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      })
+    })
+      .then(this._checkResponse);
+  }
+
+  postNewCard(data) {
+    return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: data.name,
         link: data.link,
-      }),
+      })
     })
       .then(this._checkResponse);
   }
 
-  deleteCard(cardID) {
-    return fetch(`${this._baseUrl}/cards/${cardID}`, {
-      credentials: 'include',
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse);
   }
 
-  getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
+  likeCard(method, cardId) {
+    return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
+      method: method,
+      headers: this._headers,
       credentials: 'include',
-      method: 'GET',
-      headers: this._headers
     })
       .then(this._checkResponse);
   }
 
-  editUserInfo(userData) {
-    return fetch(`${this._baseUrl}/users/me`, {
-      credentials: 'include',
+  updateAvatar(data) {
+    return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
-        name: userData.name,
-        about: userData.about,
-      }),
+        avatar: data.avatar
+      })
     })
       .then(this._checkResponse);
-  }
-
-  editUserAvatar(link) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-      credentials: 'include',
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: link,
-      }),
-    })
-      .then(this._checkResponse);
-  }
-
-  putLike(cardID) {
-    return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
-      credentials: 'include',
-      method: 'PUT',
-      headers: this._headers
-    })
-      .then(this._checkResponse);
-  }
-
-  deleteLike(cardID) {
-    return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
-      credentials: 'include',
-      method: 'DELETE',
-      headers: this._headers
-    })
-      .then(this._checkResponse);
-  }
-
-  changeLikeCardStatus(cardID, isLiked) {
-    return fetch(this._baseUrl + `/cards/${cardID}/likes`, {
-      credentials: 'include',
-      method: `${isLiked ? 'PUT' : 'DELETE'}`,
-      headers: this._headers
-    })
-      .then(this._checkResponse)
-  }
-
-  getAllNeededData() {
-    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
   }
 }
 
-export const api = new Api ({
-  baseUrl: 'https://api.mrvinil.project.nomoredomains.sbs',
-  credentials: 'include',
+export const api = new Api({
+  baseUrl: 'https://api.mrvinil.project.nomoredomains.sbs/',
   headers: {
-    'Content-Type': 'application/json',
-  }
+    'Content-Type': 'application/json'
+  },
 });

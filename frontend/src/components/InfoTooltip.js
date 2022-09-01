@@ -1,16 +1,26 @@
-import React from 'react';
+import PopupWithForm from './PopupWithForm';
+import success from '../icons/success.svg';
+import failed from '../icons/failed.svg';
 
-function InfoTooltip(props) {
+function InfoTooltip(
+  {
+    isOpen,
+    onClose,
+    toolTipText,
+    isSuccess
+  }) {
   return (
-    <div className={`popup ${props.isOpen && 'popup_opened'}`} id={props.popupID}>
-      <div className="popup__container">
-        <button className="popup__close" type="button" onClick={props.onClose}></button>
-        <div className="tooltip">
-          <img src={props.imgPath} alt={props.title}/>
-          <h2 className="tooltip__title">{props.title}</h2>
-        </div>
-      </div>
-    </div>
+    <PopupWithForm
+      name="success"
+      isOpen={isOpen}
+      onClose={onClose}>
+      <img
+        className="popup__info-tooltip"
+        src={isSuccess ? success : failed}
+        alt={isSuccess ? "Success" : "Failed"}
+      />
+      <h2 className="popup__title popup__title_center">{toolTipText}</h2>
+    </PopupWithForm>
   );
 }
 

@@ -1,12 +1,16 @@
 .profile {
+  max-width: 100%;
+  margin: 0 0 50px;
+  padding: 0;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+  column-gap: 30px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 910px)  {
   .profile {
-    flex-direction: column;
-    gap: 30px;
+    margin: 0 20px 37px;
   }
 }

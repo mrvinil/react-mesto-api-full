@@ -1,15 +1,10 @@
 .auth__input {
-  width: 100%;
+  background-color:  #000000;
+  color: #FFFFFF;
+  width: calc(100% - 4px);
   font-size: 14px;
-  line-height: 17px;
-  border: 0;
-  padding: 0 0 9px;
-  border-bottom: 1px solid #ccc;
-  background: transparent;
-  color: var(--color__white);
+  line-height: 24px;
+  border: none;
   outline: none;
-}
-
-.auth__input:focus {
-  border-bottom-color: var(--color__white);
+  border-bottom: 2px solid #CCCCCC;
 }

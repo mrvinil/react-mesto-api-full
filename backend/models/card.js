@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { linkRegExp } = require('../middlewares/validate');
 
-const cardSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     minLength: [2, 'Название должно содержать минимум 2 символа, вы ввели {VALUE}'],
@@ -12,26 +12,26 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Картинка обязательно для заполнения'],
     validate: {
-      validator(link) {
-        return linkRegExp.test(link);
+      validator(v) {
+        return linkRegExp.test(v);
       },
       message: 'Неверный URL.',
     },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
     required: [true, 'Автор обязательно для заполнения'],
+    ref: 'User',
   },
   likes: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
     default: [],
+    ref: 'User',
   }],
   createdAt: {
     type: Date,
     default: Date.now,
   },
-}, { versionKey: false });
+});
 
-module.exports = mongoose.model('card', cardSchema);
+module.exports = mongoose.model('card', userSchema);

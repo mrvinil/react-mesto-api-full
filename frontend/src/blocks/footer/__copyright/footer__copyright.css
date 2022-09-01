@@ -1,13 +1,20 @@
 .footer__copyright {
-  color: var(--color__gray);
+  margin: 0;
+  padding: 0;
   font-size: 18px;
   line-height: 22px;
-  margin: 0;
+  color: #545454;
 }
 
-/* Landscape phones and smaller */
-@media (max-width: 424px) {
+@media (max-width: 907px)  {
+  .footer__copyright {
+    padding: 0 19px;
+  }
+}
+
+@media (max-width: 480px)  {
   .footer__copyright {
     font-size: 14px;
+    line-height: 17px;
   }
 }

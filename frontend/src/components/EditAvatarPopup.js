@@ -1,42 +1,51 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup(props) {
-  const avatarRef = React.useRef();
+function EditAvatarPopup(
+  {
+    isOpen,
+    onClose,
+    onUpdateAvatar,
+    isLoading,
+    onRenderLoading
+  }) {
+
+  const avatarRef = useRef();
 
   function handleSubmit(e) {
+    onRenderLoading(true);
     e.preventDefault();
-
-    props.onUpdateAvatar(avatarRef.current.value);
+    onUpdateAvatar(
+      {
+        avatar: avatarRef.current.value
+      });
+    e.target.reset();
   }
 
-  return(
+  return (
     <PopupWithForm
-      popupID="popup__avatar"
-      formID="popup__form_avatar"
-      title="Обновить аватар"
-      name="profileAvatar"
-      buttonValue="Сохранить"
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      name="update-avatar"
+      isOpen={isOpen}
       onSubmit={handleSubmit}
-    >
-      <fieldset className="popup__field-wrap">
-        <label className="popup__field">
+      onClose={onClose}>
+      <h2 className="popup__title">Обновить аватар</h2>
+      <div className="popup__inputs">
+        <label className="popup__label">
           <input
+            id="avatar-link"
+            className="popup__input popup__input_text_avatar-link"
             type="url"
-            name="avatarLink"
-            id="avatarUrl-input"
-            className="popup__input popup__input_card-link"
-            placeholder="Ссылка на картинку"
-            required
+            name="avatar"
             ref={avatarRef}
+            placeholder="Ссылка на аватар"
+            required
           />
-          <span className="popup__error avatarUrl-input-error"></span>
+          <span className="popup__input-error avatar-link-error"></span>
         </label>
-      </fieldset>
+        <button type="submit" className="popup__btn">{isLoading ? 'Сохраняю...' : 'Сохранить'}</button>
+      </div>
     </PopupWithForm>
-  )
+  );
 }
 
 export default EditAvatarPopup;

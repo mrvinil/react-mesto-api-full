@@ -1,72 +1,40 @@
 export const BASE_URL = 'https://api.mrvinil.project.nomoredomains.sbs';
 
-const checkResponse = response => {
-  if(response.ok) {
-    return response.json();
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
   }
-  return Promise.reject(`Ошибка ${response.status}`);
+  return Promise.reject(`Ошибка ${res.status} - ${res.message}`);
 }
 
-export const register = (password, email) => {
+export const register = ({ email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
-    credentials: 'include',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({password, email})
+    credentials: 'include',
+    body: JSON.stringify({ email, password })
   })
-    .then(checkResponse)
+    .then(checkResponse);
 }
 
-export const authorize = (password, email) => {
+export const authorize = ({ email, password }) => {
   return fetch(`${BASE_URL}/signin`, {
-    credentials: 'include',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({password, email})
-  })
-    .then(checkResponse)
-    .then((data) => {
-      if (data.token) {
-        localStorage.setItem('jwt', data.token)
-        return data.token;
-      }
-    })
-}
-
-export const checkToken = token => {
-  return fetch(`${BASE_URL}/users/me`, {
     credentials: 'include',
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${token}`
-    }
+    body: JSON.stringify({ email, password })
   })
-    .then(checkResponse)
+    .then(checkResponse);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export const logout = () => {
+  return fetch(`${BASE_URL}/signout`, {
+    method: 'POST',
+    credentials: 'include',
+  })
+    .then(checkResponse);
+}

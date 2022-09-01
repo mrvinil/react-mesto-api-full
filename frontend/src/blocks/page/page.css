@@ -1,26 +1,18 @@
-:root {
-  --color__black: #000;
-  --color__white: #fff;
-  --color__gray: #545454;
-  --color__red: #FF0000;
-}
-
 .page {
-  min-width: 320px;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 45px 0 60px;
-}
-
-@media (min-width: 425px) and (max-width: 992px) {
-  .page {
-    padding: 45px 20px 60px;
-  }
-}
-
-/* Landscape phones and smaller */
-@media (max-width: 424px) {
-  .page {
-    padding: 28px 0 36px;
-  }
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  background-color: #000000;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

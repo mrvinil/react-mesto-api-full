@@ -1,55 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import AuthPageWithForm from './AuthPageWithForm';
+import Header from './Header';
 
-function Register({ onRegister }) {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+function Register({ onRegister, isLoading, loggedIn, onRenderLoading, }) {
+  const [userData, setUserData] = useState({email: '', password: ''});
 
   function handleChange(e) {
-    const {value} = e.target;
-    e.target.name === 'userEmail' ? setEmail(value) : setPassword(value);
+    const {name, value} = e.target;
+    setUserData({
+      ...userData,
+      [name]: value
+    });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    onRegister(password, email);
+    const {email, password} = userData;
+    onRegister({email, password});
+    onRenderLoading(true);
   }
 
   return (
-    <AuthPageWithForm
-      name="registerForm"
-      title="Регистрация"
-      buttonValue="Зарегистрироваться"
-      id="reg-form"
-      onSubmit={handleSubmit}
-    >
-      <label className="auth__field">
-        <input
-          type="email"
-          name="userEmail"
-          id="useremail-input"
-          className="auth__input"
-          placeholder="Email"
-          required
-          value={email || ''}
-          onChange={handleChange}
-        />
-        <span className="auth__error"></span>
-      </label>
-      <label className="auth__field">
-        <input
-          type="password"
-          name="userPassword"
-          id="userpassword-input"
-          className="auth__input"
-          placeholder="Пароль"
-          required
-          value={password || ''}
-          onChange={handleChange}
-        />
-        <span className="auth__error"></span>
-      </label>
-    </AuthPageWithForm>
+    <>
+      {!loggedIn &&
+        <Header>
+          <Link className="header__exit" to="sign-in">Войти</Link>
+        </Header>
+      }
+      <AuthPageWithForm
+        name="register"
+        title="Регистрация"
+        email={userData.email}
+        password={userData.password}
+        buttonText={isLoading ? 'Зарегистрироваться...' : 'Зарегистрироваться'}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      >
+        <div className="auth__register-signin">
+          <p className="auth__register-text">Уже зарегистрированы?
+            <Link to="sign-in" className="auth__register-link"> Войти</Link>
+          </p>
+        </div>
+      </AuthPageWithForm>
+    </>
   );
 }
 

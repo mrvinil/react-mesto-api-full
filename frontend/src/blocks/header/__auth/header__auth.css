@@ -1,6 +1,5 @@
 .header__auth {
+  margin: 0;
+  padding: 0;
   display: flex;
-  gap: 24px;
-  height: 33px;
-  align-items: center;
 }

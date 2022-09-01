@@ -1,10 +1,7 @@
 .content {
-  padding: 40px 0 66px;
-}
-
-/* Landscape phones and smaller */
-@media (max-width: 424px) {
-  .content {
-    padding: 42px 0 48px;
-  }
+  margin: 0 auto;
+  padding: 0;
+  max-width: 880px;
+  width: 100%;
+  flex: 1 1 auto;
 }

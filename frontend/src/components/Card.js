@@ -1,40 +1,37 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card(props) {
-  const currentUser = React.useContext(CurrentUserContext);
-  const isOwn = props.card.owner._id === currentUser._id;
-  const isLiked = props.card.likes.some((item) => item._id === currentUser._id);
-  const cardDeleteButtonClassName = (
-    `cards__trash ${isOwn ? '' : 'cards__trash_hidden'}`
-  );
-  const cardLikeButtonClassName = (
-    `cards__like-button ${isLiked ? 'cards__like-button_active' : ''}`
-  );
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = props.owner === currentUser._id;
+  const cardDeleteButtonClassName = (`place__cart ${isOwn ? 'place__cart-active' : ''}`);
+  const isLiked = props.likes.some(i => i === currentUser._id);
+  const cardLikeButtonClassName = `place__favorite ${isLiked ? 'place__favorite_active' : ''}`;
 
-  function handleCardClick() {
-    props.onCardClick(props.card);
+  function handleClick() {
+    props.onCardClick(props);
   }
+
   function handleLikeClick() {
-    props.onCardLike(props.card);
+    props.onCardLike(props);
   }
 
   function handleDeleteClick() {
-    props.onCardDelete(props.card);
+    props.onCardDelete(props);
   }
 
-  return(
-    <article className="cards__item">
-      <button className={cardDeleteButtonClassName} onClick={handleDeleteClick} type="button"></button>
-      <img src={props.card.link} alt={props.card.name} className="cards__img" onClick={handleCardClick}/>
-      <div className="cards__caption">
-        <h2 className="cards__name">{props.card.name}</h2>
-        <div className="cards__like-wrap">
-          <button className={cardLikeButtonClassName} onClick={handleLikeClick} type="button"></button>
-          <span className="cards__like-count">{props.card.likes.length}</span>
+  return (
+    <li className="place">
+      <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteClick}></button>
+      <img src={props.link} alt={props.name} className="place__image" onClick={handleClick}/>
+      <div className="place__name">
+        <h2 className="place__title">{props.name}</h2>
+        <div className="place__block-like">
+          <button type="button" className={cardLikeButtonClassName} onClick={handleLikeClick}></button>
+          <p className="place__like-counter">{props.likes.length}</p>
         </div>
       </div>
-    </article>
+    </li>
   );
 }
 
