@@ -136,7 +136,8 @@ const login = (req, res, next) => {
       })
         .send({ token });
     })
-    .catch(() => next(ApiError.Unauthorized('Неверный логин или пароль')));
+    .catch(() => next(ApiError.Unauthorized('Неверный логин или пароль')))
+    .catch(next);
 };
 
 const logout = (req, res) => {
